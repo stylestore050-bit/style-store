@@ -1,0 +1,420 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STYLE | ستايل</title>
+<style>
+:root {
+  --pink: #f6e3eb;
+  --light: #fff9fb;
+  --rose: #d99ab3;
+  --dark: #59364a;
+  --text: #493641;
+  --white: #ffffff;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--light);
+  color: var(--text);
+  font-family: Tahoma, Arial, sans-serif;
+}
+button { font-family: inherit; cursor: pointer; }
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 17px 6%;
+  background: #fff;
+  border-bottom: 1px solid #f1dce5;
+  position: sticky;
+  top: 0;
+  z-index: 5;
+}
+.logo {
+  font-family: Georgia, serif;
+  font-size: 30px;
+  letter-spacing: 3px;
+  color: var(--dark);
+  font-weight: bold;
+}
+.logo small {
+  display: block;
+  font: 12px Tahoma, sans-serif;
+  text-align: center;
+  letter-spacing: 1px;
+  margin-top: 3px;
+}
+.cart-button, .main-button {
+  background: var(--dark);
+  color: white;
+  border: 0;
+  border-radius: 30px;
+  padding: 12px 20px;
+  font-size: 14px;
+}
+.hero {
+  padding: 65px 20px;
+  text-align: center;
+  background: linear-gradient(140deg, #f9eaf0, #fff8fb, #f1d8e4);
+}
+.eyebrow {
+  color: #9b657d;
+  letter-spacing: 3px;
+  font-size: 12px;
+}
+.hero h1 {
+  color: var(--dark);
+  font: bold clamp(40px, 8vw, 68px) Georgia, serif;
+  letter-spacing: 4px;
+  margin: 17px 0 8px;
+}
+.hero h2 { font-size: 23px; font-weight: normal; }
+.hero p {
+  line-height: 2;
+  color: #806979;
+  max-width: 440px;
+  margin: 15px auto 25px;
+}
+.section {
+  padding: 40px 6%;
+  max-width: 1200px;
+  margin: auto;
+}
+.section-title { text-align: center; margin-bottom: 25px; }
+.section-title h2 { color: var(--dark); font-size: 25px; }
+.section-title p { color: #927b88; font-size: 13px; }
+.categories {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 28px;
+}
+.category {
+  background: white;
+  color: var(--dark);
+  border: 1px solid #ead2de;
+  border-radius: 24px;
+  padding: 10px 17px;
+}
+.category.active {
+  background: var(--dark);
+  color: white;
+  border-color: var(--dark);
+}
+.products {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+}
+.product {
+  background: white;
+  border: 1px solid #f0e1e8;
+  border-radius: 17px;
+  overflow: hidden;
+  transition: transform .2s;
+}
+.product:hover { transform: translateY(-3px); }
+.product-art {
+  height: 160px;
+  background: linear-gradient(145deg, #f9e9ef, #f4dce6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 58px;
+}
+.product-info { padding: 15px; }
+.product-info h3 { font-size: 15px; margin: 0 0 8px; }
+.product-info p { color: #947888; font-size: 12px; min-height: 30px; }
+.price { font-weight: bold; color: var(--dark); }
+.add-button {
+  width: 100%;
+  margin-top: 12px;
+  padding: 10px;
+  border: 1px solid var(--rose);
+  background: #fff7fa;
+  color: var(--dark);
+  border-radius: 9px;
+}
+.add-button:hover { background: var(--pink); }
+.empty { grid-column: 1/-1; text-align: center; padding: 30px; }
+.note {
+  background: white;
+  border: 1px solid #f0e1e8;
+  border-radius: 15px;
+  padding: 20px;
+  text-align: center;
+  line-height: 2;
+  color: #806979;
+}
+footer {
+  text-align: center;
+  padding: 30px 15px;
+  background: #f7e7ee;
+  color: var(--dark);
+  line-height: 2;
+  font-size: 13px;
+}
+.overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: #39232e80;
+  z-index: 10;
+}
+.overlay.open { display: block; }
+.cart-panel {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: min(420px, 100%);
+  height: 100%;
+  overflow-y: auto;
+  background: #fff9fb;
+  padding: 22px;
+}
+.cart-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #ead2de;
+  padding-bottom: 12px;
+}
+.close-button {
+  border: 0;
+  background: transparent;
+  font-size: 25px;
+  color: var(--dark);
+}
+.cart-item {
+  padding: 15px 0;
+  border-bottom: 1px solid #f0e1e8;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  align-items: center;
+}
+.cart-item small { display: block; color: #927b88; margin-top: 6px; }
+.quantity { display: flex; align-items: center; gap: 9px; }
+.quantity button {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1px solid #e2c4d2;
+  background: white;
+  color: var(--dark);
+}
+.total {
+  display: flex;
+  justify-content: space-between;
+  font-size: 18px;
+  font-weight: bold;
+  margin: 22px 0;
+}
+.checkout {
+  width: 100%;
+  border: 0;
+  border-radius: 10px;
+  background: var(--dark);
+  color: white;
+  padding: 14px;
+  font-size: 15px;
+}
+.clear-button {
+  width: 100%;
+  margin-top: 10px;
+  background: transparent;
+  border: 1px solid #e2c4d2;
+  padding: 10px;
+  border-radius: 10px;
+  color: var(--dark);
+}
+.cart-empty { text-align: center; padding: 35px 5px; line-height: 2; }
+@media (max-width: 800px) {
+  .products { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .product-art { height: 135px; font-size: 48px; }
+  .section { padding: 30px 4%; }
+}
+@media (max-width: 360px) {
+  .logo { font-size: 24px; }
+  .cart-button { padding: 10px 12px; }
+  .product-info { padding: 10px; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">STYLE<small>ستايل ♡</small></div>
+  <button class="cart-button" onclick="openCart()">
+    حقيبتي ♡ <span id="cart-count">0</span>
+  </button>
+</header>
+
+<section class="hero">
+  <div class="eyebrow">A LITTLE SOMETHING SPECIAL</div>
+  <h1>STYLE</h1>
+  <h2>تفاصيل صغيرة، فرحة كبيرة ♡</h2>
+  <p>أهلًا بكِ في ستايل، حيث تجدين قطعًا لطيفة ولمسات جميلة صُممت لتضيف شيئًا مميزًا ليومك.</p>
+  <button class="main-button" onclick="document.getElementById('collection').scrollIntoView({behavior:'smooth'})">
+    اكتشفي مجموعتنا ✧
+  </button>
+</section>
+
+<section class="section" id="collection">
+  <div class="section-title">
+    <h2>اختاري ما يشبهكِ</h2>
+    <p>قطعتك المفضلة قد تكون هنا ♡</p>
+  </div>
+
+  <div class="categories">
+    <button class="category active" onclick="filterProducts('الكل',this)">الكل</button>
+    <button class="category" onclick="filterProducts('أساور',this)">أساور</button>
+    <button class="category" onclick="filterProducts('إكسسوارات الجوال',this)">إكسسوارات الجوال</button>
+    <button class="category" onclick="filterProducts('خواتم',this)">خواتم</button>
+    <button class="category" onclick="filterProducts('هدايا',this)">هدايا</button>
+  </div>
+
+  <div class="products" id="products"></div>
+</section>
+
+<section class="section">
+  <div class="note">
+    ♡ صُنعت هذه المساحة بحب ♡<br>
+    اختاري هديتك، أضيفيها إلى حقيبتك، واجعلي التفاصيل الصغيرة أجمل.
+  </div>
+</section>
+
+<footer>
+  <div class="logo">STYLE</div>
+  تفاصيل صغيرة، فرحة كبيرة ♡<br>
+  <span>متجر تجريبي — الأسعار والمنتجات قابلة للتعديل</span>
+</footer>
+
+<div class="overlay" id="overlay" onclick="overlayClick(event)">
+  <aside class="cart-panel" aria-label="حقيبة التسوق">
+    <div class="cart-head">
+      <h2>حقيبتك ♡</h2>
+      <button class="close-button" onclick="closeCart()" aria-label="إغلاق">×</button>
+    </div>
+    <div id="cart-items"></div>
+    <div class="total"><span>الإجمالي</span><span id="total">0 ر.س</span></div>
+    <button class="checkout" onclick="checkout()">إتمام الطلب ♡</button>
+    <button class="clear-button" onclick="clearCart()">إفراغ الحقيبة</button>
+    <p style="font-size:12px;color:#927b88;line-height:1.8">
+      تنبيه: الطلبات غير متصلة بواتساب حاليًا. سنضيف رابط الطلب بعد تجهيز رقم المتجر.
+    </p>
+  </aside>
+</div>
+
+<script>
+const products = [
+  {id:1, name:"سوار ناعم", category:"أساور", price:15, icon:"📿", desc:"لمسة ناعمة لإطلالتك"},
+  {id:2, name:"تعليقة جوال", category:"إكسسوارات الجوال", price:10, icon:"🎀", desc:"تفصيلة لطيفة لجوالك"},
+  {id:3, name:"خاتم رقيق", category:"خواتم", price:12, icon:"💍", desc:"بسيط وجميل"},
+  {id:4, name:"هدية صغيرة", category:"هدايا", price:25, icon:"🎁", desc:"لشخص يستحق الفرح"},
+  {id:5, name:"مشبك شعر", category:"إكسسوارات الجوال", price:8, icon:"🌸", desc:"لمسة وردية لطيفة"},
+  {id:6, name:"سوار اللؤلؤ", category:"أساور", price:18, icon:"🤍", desc:"أناقة بتفاصيل بسيطة"},
+  {id:7, name:"صندوق المفاجآت", category:"هدايا", price:35, icon:"🎀", desc:"هدية مليئة بالحب"},
+  {id:8, name:"قلادة ناعمة", category:"خواتم", price:20, icon:"♡", desc:"قطعة تكمل مجموعتك"}
+];
+
+let cart = {};
+let currentCategory = "الكل";
+
+function renderProducts() {
+  const shown = products.filter(p => currentCategory === "الكل" || p.category === currentCategory);
+  document.getElementById("products").innerHTML = shown.map(p => `
+    <article class="product">
+      <div class="product-art">${p.icon}</div>
+      <div class="product-info">
+        <h3>${p.name}</h3>
+        <p>${p.desc}</p>
+        <div class="price">${p.price} ر.س</div>
+        <button class="add-button" onclick="addToCart(${p.id})">أضيفي إلى الحقيبة +</button>
+      </div>
+    </article>
+  `).join("");
+}
+
+function filterProducts(category, button) {
+  currentCategory = category;
+  document.querySelectorAll(".category").forEach(b => b.classList.remove("active"));
+  button.classList.add("active");
+  renderProducts();
+}
+
+function addToCart(id) {
+  cart[id] = (cart[id] || 0) + 1;
+  renderCart();
+}
+
+function changeQuantity(id, amount) {
+  cart[id] = (cart[id] || 0) + amount;
+  if (cart[id] <= 0) delete cart[id];
+  renderCart();
+}
+
+function renderCart() {
+  const ids = Object.keys(cart);
+  const count = ids.reduce((sum, id) => sum + cart[id], 0);
+  const total = ids.reduce((sum, id) => {
+    const product = products.find(p => p.id === Number(id));
+    return sum + product.price * cart[id];
+  }, 0);
+
+  document.getElementById("cart-count").textContent = count;
+  document.getElementById("total").textContent = total + " ر.س";
+
+  document.getElementById("cart-items").innerHTML = ids.length ? ids.map(id => {
+    const p = products.find(item => item.id === Number(id));
+    return `
+      <div class="cart-item">
+        <div>${p.icon} <strong>${p.name}</strong>
+          <small>${p.price} ر.س للقطعة</small>
+        </div>
+        <div class="quantity">
+          <button onclick="changeQuantity(${p.id},-1)">−</button>
+          <span>${cart[id]}</span>
+          <button onclick="changeQuantity(${p.id},1)">+</button>
+        </div>
+      </div>
+    `;
+  }).join("") : '<div class="cart-empty">حقيبتك فارغة حاليًا ♡<br>اختاري قطعة تحبينها من مجموعتنا.</div>';
+}
+
+function openCart() {
+  document.getElementById("overlay").classList.add("open");
+  renderCart();
+}
+
+function closeCart() {
+  document.getElementById("overlay").classList.remove("open");
+}
+
+function overlayClick(event) {
+  if (event.target.id === "overlay") closeCart();
+}
+
+function clearCart() {
+  cart = {};
+  renderCart();
+}
+
+function checkout() {
+  if (!Object.keys(cart).length) {
+    alert("حقيبتك فارغة! أضيفي منتجًا أولًا ♡");
+    return;
+  }
+  alert("هذه نسخة تجريبية من متجر STYLE ♡\nحفظنا المنتجات في حقيبتك، وسنفعّل الطلب عبر واتساب بعد إعداد رقم المتجر.");
+}
+
+renderProducts();
+renderCart();
+</script>
+</body>
+  </html>
+  
